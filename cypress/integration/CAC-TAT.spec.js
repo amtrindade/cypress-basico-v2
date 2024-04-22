@@ -43,7 +43,7 @@ describe('Central de Atendimento ao Cliente', function () {
         cy.get('#firstName').type('Joãozinho')
         cy.get('#lastName').type('De Jesus')
         cy.get('#email').type('joazinho@@mail.com')
-        cy.get('#phone-checkbox').click()
+        cy.get('#phone-checkbox').check()
         cy.get('#open-text-area').type('teste')
 
         cy.contains('button', 'Enviar').click()
@@ -97,10 +97,36 @@ describe('Central de Atendimento ao Cliente', function () {
             .should('have.value', 'mentoria')
     })
 
-    it('seleciona um produto (Blog) por seu índice', function(){
+    it('Seleciona um produto (Blog) por seu índice', function(){
         cy.get('#product')
             .select(1)
             .should('have.value', 'blog')
+    })
+
+    it('Marca o tipo Feedback', function() {
+        cy.get('input[type="radio"][value="feedback"]')
+            .check()
+            .should('have.value', 'feedback')
+    })
+
+    it('Marca cada tipo de atendimento', function() {
+        cy.get('input[type="radio"]')
+            .should('have.length', 3)
+            .each(function($radio){
+                cy.wrap($radio)
+                    .check()
+                    .should('be.checked')
+            })
+    
+    })
+
+    it('Marca ambos checkboxes, depois desmarca o último', function() {
+        cy.get('input[type="checkbox"]')
+            .check()
+            .should('be.checked')
+            .last()
+            .uncheck()
+            .should('not.be.checked')
     })
 
 })
