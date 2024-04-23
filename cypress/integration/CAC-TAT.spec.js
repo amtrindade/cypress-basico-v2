@@ -202,7 +202,7 @@ describe('Central de Atendimento ao Cliente', function () {
           .should('not.be.visible')
       })
 
-    it.only('Preenche a area de texto usando o comando invoke', function() {
+    it('Preenche a area de texto usando o comando invoke', function() {
         const longText = Cypress._.repeat('0123456789', 20)
         cy.get('#open-text-area')
             .invoke('val', longText)
