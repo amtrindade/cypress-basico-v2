@@ -134,7 +134,6 @@ describe('Central de Atendimento ao Cliente', function () {
                     .check()
                     .should('be.checked')
             })
-    
     })
 
     it('Marca ambos checkboxes, depois desmarca o último', function() {
@@ -184,6 +183,30 @@ describe('Central de Atendimento ao Cliente', function () {
             .click()
         cy.contains('Não salvamos dados submetidos no formulário da aplicação CAC TAT.')
             .should('be.visible')
+    })
+
+    it('Exibe e esconde as mensagens de sucesso e erro usando o .invoke', function() {
+        cy.get('.success')
+          .should('not.be.visible')
+          .invoke('show')
+          .should('be.visible')
+          .and('contain', 'Mensagem enviada com sucesso.')
+          .invoke('hide')
+          .should('not.be.visible')
+        cy.get('.error')
+          .should('not.be.visible')
+          .invoke('show')
+          .should('be.visible')
+          .and('contain', 'Valide os campos obrigatórios!')
+          .invoke('hide')
+          .should('not.be.visible')
+      })
+
+    it.only('Preenche a area de texto usando o comando invoke', function() {
+        const longText = Cypress._.repeat('0123456789', 20)
+        cy.get('#open-text-area')
+            .invoke('val', longText)
+            .should('have.value', longText)
     })
 
 })
