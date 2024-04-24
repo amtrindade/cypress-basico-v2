@@ -209,4 +209,15 @@ describe('Central de Atendimento ao Cliente', function () {
             .should('have.value', longText)
     })
 
+    it('Faz uma requisição HTTP do tipo GET', function(){
+        cy.request({
+                method: 'GET',
+                url: 'https://cac-tat.s3.eu-central-1.amazonaws.com/index.html'
+            }).then((response) => {
+                expect(response.status).to.equal(200);
+                expect(response.statusText).to.equal('OK')
+                expect(response.body).to.contains('CAC TAT')
+            })
+    })
+
 })
