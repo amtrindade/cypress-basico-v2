@@ -220,4 +220,14 @@ describe('Central de Atendimento ao Cliente', function () {
             })
     })
 
+    it.only('Encontra o gato escondido', function(){
+        cy.get('#cat')
+            .invoke('show')
+            .should('be.visible')
+
+        cy.get('#title')
+            .invoke('text', 'Skull 💀')
+            .should('have.text', 'Skull 💀')
+    })
+
 })
