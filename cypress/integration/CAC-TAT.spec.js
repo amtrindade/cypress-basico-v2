@@ -220,7 +220,7 @@ describe('Central de Atendimento ao Cliente', function () {
             })
     })
 
-    it.only('Encontra o gato escondido', function(){
+    it('Encontra o gato escondido', function(){
         cy.get('#cat')
             .invoke('show')
             .should('be.visible')
